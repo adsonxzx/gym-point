@@ -1,0 +1,7 @@
+{
+  "name": "gym-point",
+  "version": "1.0.0",
+  "description": "aplicacao para gerenciamento de academia",
+  "main": "index.js",
+  "license": "MIT"
+}

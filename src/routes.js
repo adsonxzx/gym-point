@@ -1,9 +1,28 @@
-const express = require('express')
+// Controllers
+import SessionController from './app/controllers/SessionController';
 
-const routes = new express.Router()
+import auth from './app/middlewares/auth';
 
-routes.get('/', (req, res) => {
-  res.json({ok: 'ok'})
-})
+const express = require('express');
 
-module.exports = routes
+const routes = new express.Router();
+
+/**
+ * Public Routes
+ */
+
+// Sessions
+routes.post('/sessions', SessionController.store);
+
+/**
+ * Private Routes
+ */
+
+routes.use(auth);
+
+// Studants
+routes.get('/students', (req, res) => {
+  res.json({ ok: true });
+});
+
+module.exports = routes;

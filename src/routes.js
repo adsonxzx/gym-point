@@ -1,5 +1,6 @@
 // Controllers
 import SessionController from './app/controllers/SessionController';
+import StudentController from './app/controllers/StudentController';
 
 import auth from './app/middlewares/auth';
 
@@ -21,8 +22,10 @@ routes.post('/sessions', SessionController.store);
 routes.use(auth);
 
 // Studants
-routes.get('/students', (req, res) => {
-  res.json({ ok: true });
-});
+routes.post('/students', StudentController.store);
+routes.get('/students', StudentController.index);
+routes.get('/students/:id', StudentController.show);
+routes.put('/students/:id', StudentController.update);
+routes.delete('/students/:id', StudentController.delete);
 
 module.exports = routes;

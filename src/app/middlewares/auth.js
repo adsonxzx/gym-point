@@ -3,6 +3,11 @@ import authConfig from '../../config/auth';
 
 module.exports = async (req, res, next) => {
   const { authorization } = req.headers;
+
+  if (!authorization) {
+    return res.status(400).json({ error: 'Token not informed' });
+  }
+
   const [, token] = authorization.split(' ');
 
   try {

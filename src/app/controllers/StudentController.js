@@ -98,9 +98,9 @@ class StudentController {
       return res.status(404).json({ error: 'Student not founded!' });
     }
 
-    const teste = await student.destroy();
+    await student.destroy();
 
-    return res.json(teste);
+    return res.json({ success: 'Studant deleted with success' });
   }
 }
 

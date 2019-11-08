@@ -36,6 +36,59 @@ class PlanController {
 
     return res.json(plan);
   }
+
+  async index(req, res) {
+    const plans = await Plan.findAll();
+
+    return res.json(plans);
+  }
+
+  async show(req, res) {
+    const plan = await Plan.findByPk(req.params.id);
+
+    if (!plan) {
+      return res.json({ error: 'Plan not founded!' });
+    }
+
+    return res.json(plan);
+  }
+
+  async update(req, res) {
+    /**
+     * Validation
+     */
+    const schema = Yup.object().shape({
+      title: Yup.string(),
+      duration: Yup.number(),
+      price: Yup.number(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.json({ error: 'Validation Error!' });
+    }
+
+    const plan = await Plan.findByPk(req.params.id);
+
+    if (!plan) {
+      return res.json({ error: 'Plan not founded!' });
+    }
+
+    await plan.update(req.body);
+
+    return res.json(plan);
+  }
+
+  async delete(req, res) {
+    const plan = await Plan.findByPk(req.params.id);
+
+    if (!plan) {
+      return res.status(404).json({ error: 'Plan not founded!' });
+    }
+
+    await plan.destroy();
+
+    return res.json({ success: 'Plan deleted with success' });
+  }
 }
 
 export default new PlanController();

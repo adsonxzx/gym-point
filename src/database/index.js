@@ -5,12 +5,10 @@ import User from '../app/models/User';
 import Student from '../app/models/Student';
 import Plan from '../app/models/Plan';
 import Registration from '../app/models/Registration';
+import HelpOrders from '../app/models/HelpOrders';
 
-const models = [User, Student, Plan, Registration];
+const models = [User, Student, Plan, Registration, HelpOrders];
 
-/**
- * Estabelece conexao com o banco e faz Load dos models
- */
 class Database {
   constructor() {
     this.init();
@@ -20,7 +18,7 @@ class Database {
     this.connection = new Sequelize(databaseConfig);
     models.map(model => model.init(this.connection));
     models.map(
-      model => models.associate && model.associate(this.connection.models)
+      model => model.associate && model.associate(this.connection.models)
     );
   }
 }

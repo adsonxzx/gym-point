@@ -53,7 +53,20 @@ class RegistrationController {
   }
 
   async index(req, res) {
-    const registrations = await Registration.findAll();
+    const registrations = await Registration.findAll({
+      include: [
+        {
+          model: Plan,
+          as: 'plan',
+          attributes: ['title', 'price', 'duration'],
+        },
+        {
+          model: Student,
+          as: 'student',
+          attributes: ['nome', 'email'],
+        },
+      ],
+    });
 
     return res.json(registrations);
   }

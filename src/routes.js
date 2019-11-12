@@ -5,6 +5,7 @@ import PlanController from './app/controllers/PlanController';
 import RegistrationController from './app/controllers/RegistrationController';
 import HelpOrdersController from './app/controllers/HelpOrdersController';
 import HelpOrdersAnswerController from './app/controllers/HelpOrdersAnswerController';
+import CheckinController from './app/controllers/CheckinController';
 
 import auth from './app/middlewares/auth';
 
@@ -22,6 +23,10 @@ routes.post('/sessions', SessionController.store);
 // Help Orders
 routes.post('/students/:id/help_orders', HelpOrdersController.store);
 routes.get('/students/:id/help_orders', HelpOrdersController.index);
+
+// Checkin
+routes.post('/students/:student_id/checkins', CheckinController.store);
+routes.get('/students/:student_id/checkins', CheckinController.index);
 
 /**
  * Private Routes

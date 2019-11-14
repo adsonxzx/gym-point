@@ -1,8 +1,9 @@
 import * as Yup from 'yup';
-import { addMonths, fromUnixTime } from 'date-fns';
+import { addMonths, fromUnixTime, format } from 'date-fns';
 import Registration from '../models/Registration';
 import Student from '../models/Student';
 import Plan from '../models/Plan';
+import Mail from '../../lib/Mail';
 
 class RegistrationController {
   async store(req, res) {
@@ -47,6 +48,21 @@ class RegistrationController {
       plan_id,
       price: plan.price,
       student_id,
+    });
+
+    await Mail.sendMail({
+      to: `${student.nome} <${student.email}>`,
+      subject: 'Matrícula realizada com sucesso',
+      template: 'registration',
+      context: {
+        title: plan.title,
+        nome: student.nome,
+        price_total: plan.price * plan.duration,
+        duration: plan.duration,
+        price: plan.price,
+        data_inicial: format(registtration.start_date, "dd'/'MM'/'yyyy"),
+        data_final: format(registtration.end_date, "dd'/'MM'/'yyyy"),
+      },
     });
 
     return res.json(registtration);

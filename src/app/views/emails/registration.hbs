@@ -1,0 +1,126 @@
+<style>
+  .registration {
+    margin-bottom: 20px;
+  }
+  .color {
+    color: red;
+  }
+
+  .msg-principal {
+    background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+    color: #fff;
+    text-align: center;
+    font-size: 23px;
+    padding: 17px;
+  }
+
+  .plan-name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .plan-name span {
+    margin-bottom: 10px;
+  }
+
+  .plan-icon {
+    width: 40px;
+  }
+
+  .text-principal {
+    text-align: center;
+    color: #404040;
+    font-weight: 600;
+    margin: 22px;
+  }
+
+  .text-destaque {
+    margin-bottom: 16px;
+  }
+
+  .text-destaque span{
+    color: #2CB5E8;
+  }
+
+  .text-auxiliar {
+    font-weight: 400;
+    max-width: 350px;
+    margin: 18px auto;
+  }
+
+  .datas {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .datas .data {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 2;
+  }
+
+  .datas .data:first-child {
+    border-right: 1px solid #ccc;
+  }
+
+  .datas .data span:first-child {
+    font-weight: 500;
+    font-size: 15px;
+  }
+
+  .frase {
+    margin-top: 30px;
+    display: block;
+  }
+  
+  .frase, .frase-autor {
+    font-weight: 500;
+    font-size: 15px;
+  }
+
+</style>
+<div class="registration">
+  <div class="msg-principal">
+    <span>Matrícula Realizada com Sucesso</span>
+  </div>
+
+  <div class="text-principal">
+    <p class="text-destaque"> Olá, <span> {{nome}}</span> </p>
+
+    <p class="text-destaque">Sua matrícula foi realizada com sucesso!</p>    
+    
+    <div class="plan-name">
+      <span style="text-transform: capitalize;">{{title}}</span>
+      <img class="plan-icon" src="data:image/svg+xml;base64,
+        PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiI+PGc+PHBvbHlnb24gc3R5bGU9ImZpbGw6I0ZGRTE4MjsiIHBvaW50cz0iMzYwLjEyOSwxNzIuMTM4IDI1Niw0NzIuMjc2IDUxMiwxNzIuMTM4ICIgZGF0YS1vcmlnaW5hbD0iI0ZGRTE4MiI+PC9wb2x5Z29uPjxnPgoJPHBvbHlnb24gc3R5bGU9ImZpbGw6I0ZGQ0Q3MzsiIHBvaW50cz0iMTA1LjkzMSwzOS43MjQgMCwxNzIuMTM4IDE1MS44NzEsMTcyLjEzOCAgIiBkYXRhLW9yaWdpbmFsPSIjRkZDRDczIj48L3BvbHlnb24+Cgk8cG9seWdvbiBzdHlsZT0iZmlsbDojRkZDRDczOyIgcG9pbnRzPSIzNjAuMTI5LDE3Mi4xMzggNTEyLDE3Mi4xMzggNDA2LjA2OSwzOS43MjQgICIgZGF0YS1vcmlnaW5hbD0iI0ZGQ0Q3MyI+PC9wb2x5Z29uPgoJPHBvbHlnb24gc3R5bGU9ImZpbGw6I0ZGQ0Q3MzsiIHBvaW50cz0iMzYwLjEyOSwxNzIuMTM4IDI1NiwzOS43MjQgMTUxLjg3MSwxNzIuMTM4ICAiIGRhdGEtb3JpZ2luYWw9IiNGRkNENzMiPjwvcG9seWdvbj4KPC9nPjxwb2x5Z29uIHN0eWxlPSJmaWxsOiNGRkFBNjQ7IiBwb2ludHM9IjI1NiwzOS43MjQgMTA1LjkzMSwzOS43MjQgMTUxLjg3MSwxNzIuMTM4ICIgZGF0YS1vcmlnaW5hbD0iI0ZGQUE2NCI+PC9wb2x5Z29uPjxwb2x5Z29uIHN0eWxlPSJmaWxsOiNGRkUxODI7IiBwb2ludHM9IjQwNi4wNjksMzkuNzI0IDI1NiwzOS43MjQgMzYwLjEyOSwxNzIuMTM4ICIgZGF0YS1vcmlnaW5hbD0iI0ZGRTE4MiI+PC9wb2x5Z29uPjxwb2x5Z29uIHN0eWxlPSJmaWxsOiNGRkFBNjQ7IiBwb2ludHM9IjE1MS44NzEsMTcyLjEzOCAyNTYsNDcyLjI3NiAzNjAuMTI5LDE3Mi4xMzggIiBkYXRhLW9yaWdpbmFsPSIjRkZBQTY0Ij48L3BvbHlnb24+PHBvbHlnb24gc3R5bGU9ImZpbGw6I0ZGOEM1QSIgcG9pbnRzPSIwLDE3Mi4xMzggMjU2LDQ3Mi4yNzYgMTUxLjg3MSwxNzIuMTM4ICIgZGF0YS1vcmlnaW5hbD0iI0ZGOEM1QSIgY2xhc3M9ImFjdGl2ZS1wYXRoIiBkYXRhLW9sZF9jb2xvcj0iI0ZGOEM1QSI+PC9wb2x5Z29uPjwvZz4gPC9zdmc+" />
+    </div>
+
+    <span style="margin: 8px; display: block;"> R$ {{price_total}}‬,00</span>
+
+    <p class="text-auxiliar">Obrigado por se matricular na Gym Point.
+      Agora você tem acesso a todas academias de nossa rede.
+    </p>
+
+    <p class="text-auxiliar">Plano de {{duration}} meses por R${{price}}/mês;</p>
+
+    <div class="datas">
+      <div class="data">
+        <span>Data inicial</span>
+        <span>{{data_inicial}}</span>
+      </div>
+
+      <div class="data">
+        <span>Data Final</span>
+        <span>{{data_final}}</span>
+      </div>
+    </div>
+
+    <span class="frase">"A persistência é o caminho do êxito."</span>
+    <span class="frase-autor">Charles Chaplin</span>
+  </div>
+</div>

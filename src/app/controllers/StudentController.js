@@ -2,9 +2,15 @@ import * as Yup from 'yup';
 import Student from '../models/Student';
 
 class StudentController {
-  // Index
   async index(req, res) {
-    const students = await Student.findAll();
+    const { page } = req.params;
+    const limit = 10;
+
+    const students = await Student.findAll({
+      limit,
+      offset: page * limit,
+      order: [['created_at', 'DESC']],
+    });
 
     return res.json(students);
   }
@@ -29,9 +35,6 @@ class StudentController {
       email: Yup.string()
         .email()
         .required(),
-      peso: Yup.number(),
-      idade: Yup.number(),
-      altura: Yup.number(),
     });
 
     // Validation
@@ -61,15 +64,14 @@ class StudentController {
     const schema = Yup.object().shape({
       nome: Yup.string(),
       email: Yup.string().email(),
-      peso: Yup.number(),
-      idade: Yup.number(),
-      altura: Yup.number(),
     });
 
     // Validation
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation error!' });
     }
+
+    const { nome, email, peso, idade, altura } = req.body;
 
     const { id } = req.params;
     const student = await Student.findByPk(id);
@@ -78,14 +80,22 @@ class StudentController {
       return res.status(404).json({ error: 'Studant not founded!' });
     }
 
-    const { nome, email, peso, idade, altura } = await student.update(req.body);
-
-    return res.json({
+    console.log(idade);
+    const data = await student.update({
       nome,
       email,
-      peso,
-      idade,
-      altura,
+      peso: Number(peso),
+      idade: Number(idade),
+      altura: Number(altura),
+    });
+
+    return res.json({
+      id: data.id,
+      nome: data.nome,
+      email: data.email,
+      peso: data.peso,
+      idade: data.idade,
+      altura: data.altura,
     });
   }
 

@@ -3,14 +3,21 @@ import Student from '../models/Student';
 
 class StudentController {
   async index(req, res) {
-    const { page } = req.params;
-    const limit = 10;
+    const { page } = req.query;
 
-    const students = await Student.findAll({
-      limit,
-      offset: page * limit,
-      order: [['created_at', 'DESC']],
-    });
+    if (page) {
+      const limit = 10;
+
+      const students = await Student.findAll({
+        limit,
+        offset: page * limit,
+        order: [['created_at', 'DESC']],
+      });
+
+      return res.json(students);
+    }
+
+    const students = await Student.findAll();
 
     return res.json(students);
   }

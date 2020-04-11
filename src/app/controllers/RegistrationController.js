@@ -69,6 +69,32 @@ class RegistrationController {
   }
 
   async index(req, res) {
+    const { page } = req.query;
+
+    if (page) {
+      const limit = 9;
+
+      const registrations = await Registration.findAll({
+        include: [
+          {
+            model: Plan,
+            as: 'plan',
+            attributes: ['title', 'price', 'duration'],
+          },
+          {
+            model: Student,
+            as: 'student',
+            attributes: ['nome', 'email'],
+          },
+        ],
+        limit,
+        offset: (page - 1) * limit,
+        order: [['created_at', 'DESC']],
+      });
+
+      return res.json(registrations);
+    }
+
     const registrations = await Registration.findAll({
       include: [
         {
@@ -85,6 +111,30 @@ class RegistrationController {
     });
 
     return res.json(registrations);
+  }
+
+  async show(req, res) {
+    const { plan_id } = req.params;
+
+    try {
+      const registration = await Registration.findByPk(plan_id, {
+        include: [
+          {
+            model: Plan,
+            as: 'plan',
+            attributes: ['title', 'price', 'duration'],
+          },
+          {
+            model: Student,
+            as: 'student',
+            attributes: ['nome', 'email'],
+          },
+        ],
+      });
+      return res.json(registration);
+    } catch (error) {
+      return res.status(500).json({ error: 'Error Interno' });
+    }
   }
 
   async update(req, res) {

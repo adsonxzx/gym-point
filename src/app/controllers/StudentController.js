@@ -1,20 +1,35 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 import Student from '../models/Student';
 
 class StudentController {
   async index(req, res) {
     const { page } = req.query;
+    const { name } = req.query;
 
     if (page) {
-      const limit = 10;
+      const limit = 9;
 
       const students = await Student.findAll({
         limit,
-        offset: page * limit,
+        offset: (page - 1) * limit,
         order: [['created_at', 'DESC']],
       });
 
       return res.json(students);
+    }
+
+    if (name) {
+      try {
+        const students = await Student.findAll({
+          where: {
+            nome: { [Op.iLike]: `%${name}%` },
+          },
+        });
+        return res.json(students);
+      } catch (error) {
+        return res.status(500).json({ error });
+      }
     }
 
     const students = await Student.findAll();
@@ -87,7 +102,6 @@ class StudentController {
       return res.status(404).json({ error: 'Studant not founded!' });
     }
 
-    console.log(idade);
     const data = await student.update({
       nome,
       email,
